@@ -22,6 +22,7 @@
 
 - `./.codex/skills/go-kratos`
 - `./.codex/skills/cc-skills-golang`
+- `./.codex/skills/agent-rules-books`
 
 引用 skill 时只使用 skill 名称或上述相对路径，不要写本机用户主目录下的绝对路径。
 
@@ -37,8 +38,9 @@ Go 代码风格优先级：
 1. Google Go Style Decisions（最高优先级）
 2. Uber Go Style Guide
 3. `cc-skills-golang` 中的具体子技能
-4. 本 `AGENTS.md` / `go-kratos` skill 的 Kratos 分层、架构与生成代码规则
-5. 当前仓库既有风格和通用 Go 惯用写法
+4. `agent-rules-books` 中的 Clean Code / Refactoring / 软件设计书本规则
+5. 本 `AGENTS.md` / `go-kratos` skill 的 Kratos 分层、架构与生成代码规则
+6. 当前仓库既有风格和通用 Go 惯用写法
 
 如果规则冲突，优先按更高优先级执行；除非系统 / 开发者 / 用户指令明确要求例外。
 
@@ -58,6 +60,10 @@ Go 代码风格优先级：
 - 处理依赖、Go 版本升级、现代化改造：`cc-skills-golang:golang-dependency-management`、`cc-skills-golang:golang-modernize`
 
 涉及 Kratos、protobuf API、配置、分层、wire、buf 时，优先同时使用 `go-kratos` skill。
+
+### 书本原则 Skills
+
+涉及 cleanup、refactor、命名、模块边界、复杂度控制、遗留代码接缝、设计评审时，使用 `agent-rules-books` skill。该 skill 随仓库携带，来源于 `agent-rules-books`，覆盖 Clean Code、Refactoring、A Philosophy of Software Design、Working Effectively with Legacy Code、Clean Architecture、Code Complete、DDD、PoEAA、DDIA、Release It!、The Pragmatic Programmer、Refactoring.Guru 等规则集；按任务加载 `references/<book>/<book>.mini.md`，不要引用本机绝对路径。
 
 ---
 
