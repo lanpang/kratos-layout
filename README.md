@@ -1,59 +1,127 @@
-# kratos-tpl
-my [go-kratos](https://github.com/go-kratos/kratos) Project Template base on offical kratos layout
-> The BSR allows 10 unauthenticated code generation requests per hour, 
- with a burst of up to 10 requests. If you send more than 10 unauthenticated 
- requests per hour using remote plugins, you’ll receive a rate limit error.
- https://buf.build/docs/bsr/rate-limits
-> 
-## Features
- + use [go-task](https://github.com/go-task/task) rather than make
- + use [buf](https://github.com/bufbuild/buf) for proto build
- + built in zap with lumbjack
- + use [goreleaser](https://github.com/goreleaser/goreleaser) to cross build
-## related tools
-goreleaser (Optional)
+# kratos-layout
+
+`kratos-layout` 是一个基于 [go-kratos](https://github.com/go-kratos/kratos) 官方 layout 扩展的 Go 微服务项目模板。
+
+当前仓库地址：
+
 ```bash
-go install github.com/goreleaser/goreleaser@latest
+git@github.com:lanpang/kratos-layout.git
 ```
-Task (Optional)
+
+## 特性
+
+- 基于 go-kratos v2 的分层项目结构
+- 使用 [buf](https://github.com/bufbuild/buf) 管理 protobuf 生成
+- 使用 Wire 生成依赖注入代码
+- 内置 zap + lumberjack 日志配置
+- 提供 PostgreSQL / GORM 配置示例
+- 提供 `Makefile` 和 `Taskfile.yml` 常用开发命令
+
+## 环境准备
+
+安装项目常用工具：
+
+```bash
+make init
+```
+
+也可以按需单独安装：
+
+```bash
+go install github.com/bufbuild/buf/cmd/buf@latest
+go install github.com/google/wire/cmd/wire@latest
+go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
+```
+
+如果需要使用 Task：
+
 ```bash
 go install github.com/go-task/task/v3/cmd/task@latest
 ```
-Buf
-```bash
-go install github.com/bufbuild/buf/cmd/buf@latest
-```
-for more info, please refer [buf document](https://buf.build/docs/installation)
 
-kratos
+## 使用模板创建项目
+
+推荐使用 SSH 地址：
+
 ```bash
-go install github.com/go-kratos/kratos/cmd/kratos/v2@latest && kratos upgrade
-```
-if you want to build all platform simply,you may need install [goreleaser](https://github.com/goreleaser/goreleaser),and build with
-```bash
-goreleaser build --snapshot --clean
-```
-also you can create a release in your github,the compile is auto completed
-## usage
-run the command:
-```
-kratos new <your App Name> -r https://github.com/tpl-x/kratos.git
-```
-or
-```
-kratos new <your App Name> -r git@github.com:tpl-x/kratos.git
+kratos new <your-app-name> -r git@github.com:lanpang/kratos-layout.git
 ```
 
-to create your first Application
-> to generate api only using buf ,you can follow the steps below:
-> 
-> step 1:update buf dep
-> ```bash
-> buf dep update
->```
->  if you want to clean up unused dep. use `buf dep prune `
-> 
-> step 2 :generate api from protobuf
-> ```bash
-> buf generate
->   ```
+也可以直接克隆当前模板仓库：
+
+```bash
+git clone git@github.com:lanpang/kratos-layout.git
+cd kratos-layout
+```
+
+## 常用命令
+
+```bash
+# 生成 protobuf、gRPC、HTTP、校验和文档代码
+make proto
+
+# 生成 Wire 依赖注入代码
+make wire
+
+# 构建服务
+make build
+
+# 运行服务，默认读取 ./configs
+make run
+
+# 运行测试
+make test
+
+# 整理 Go module
+make tidy
+```
+
+如果使用 Task：
+
+```bash
+task proto
+task build
+```
+
+## protobuf 生成说明
+
+首次生成或更新 buf 依赖：
+
+```bash
+buf dep update
+```
+
+清理未使用的 buf 依赖：
+
+```bash
+buf dep prune
+```
+
+生成 API 相关代码：
+
+```bash
+buf generate
+```
+
+> 注意：buf BSR 对未认证请求有频率限制。如果频繁使用 remote plugins 生成代码，建议登录 buf 或配置本地插件。
+
+## 配置
+
+默认配置文件位于：
+
+```text
+configs/config.yaml
+```
+
+其中包含 HTTP、gRPC、数据库和日志配置示例。运行前请根据本地环境调整数据库连接信息。
+
+## 目录结构
+
+```text
+api/        生成后的 API 代码
+cmd/        服务启动入口
+configs/    配置文件
+internal/   业务实现代码
+proto/      protobuf 源文件
+docs/       OpenAPI 等文档产物
+```
