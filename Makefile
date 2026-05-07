@@ -1,8 +1,13 @@
-APP_NAME := server
-CMD_DIR := ./cmd/server
+# Default to the only command under ./cmd so cloned/new repos do not keep
+# a stale ./cmd/server path. Multi-command repos can override APP_NAME/CMD_DIR.
+CMD_DIRS := $(sort $(wildcard ./cmd/*))
+APP_NAME ?= $(if $(filter 1,$(words $(CMD_DIRS))),$(notdir $(firstword $(CMD_DIRS))),server)
+CMD_DIR ?= ./cmd/$(APP_NAME)
 CONFIG_DIR := ./configs
+BUF ?= buf
+WIRE ?= go tool wire
 
-.PHONY: help init proto wire build run test tidy clean release
+.PHONY: help init proto wire check-cmd build run test tidy clean release
 
 help:
 	@echo "Available targets:"
@@ -18,14 +23,22 @@ help:
 
 init:
 	go install github.com/bufbuild/buf/cmd/buf@latest
-	go install github.com/google/wire/cmd/wire@latest
+	go get -tool github.com/google/wire/cmd/wire@v0.7.0
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 
 proto:
-	buf generate
+	$(BUF) generate
 
-wire:
-	wire $(CMD_DIR)
+check-cmd:
+	@test -d "$(CMD_DIR)" || { \
+		echo "CMD_DIR '$(CMD_DIR)' does not exist."; \
+		echo "Available command dirs: $(CMD_DIRS)"; \
+		echo "Set APP_NAME=<name> or CMD_DIR=./cmd/<name>."; \
+		exit 1; \
+	}
+
+wire: check-cmd
+	$(WIRE) $(CMD_DIR)
 
 build: proto wire
 	go build -o bin/$(APP_NAME) $(CMD_DIR)
