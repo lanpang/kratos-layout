@@ -1,0 +1,21 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+      value: buf.build/go/protovalidate
+
+plugins:
+  # Generate Go protobuf types through go run instead of a remote BSR plugin.
+  - local: ["go", "run", "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11"]
+    out: .
+    opt: paths=source_relative
+
+  # Generate protoc-gen-validate compatibility stubs through go run.
+  # Runtime validation still uses buf.build/go/protovalidate for buf.validate rules.
+  - local: ["go", "run", "github.com/envoyproxy/protoc-gen-validate@v1.3.3"]
+    out: .
+    opt:
+      - lang=go
+      - paths=source_relative

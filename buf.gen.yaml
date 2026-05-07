@@ -1,0 +1,82 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+      value: buf.build/go/protovalidate
+
+plugins:
+  # Generate Go protobuf types through go run instead of a remote BSR plugin.
+  - local: ["go", "run", "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11"]
+    out: api
+    opt: paths=source_relative
+
+  # Generate Go gRPC stubs through go run instead of a remote BSR plugin.
+  - local: ["go", "run", "google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1"]
+    out: api
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+
+  # Generate protoc-gen-validate compatibility stubs through go run.
+  # Runtime validation still uses buf.build/go/protovalidate for buf.validate rules.
+  - local: ["go", "run", "github.com/envoyproxy/protoc-gen-validate@v1.3.3"]
+    out: api
+    opt:
+      - lang=go
+      - paths=source_relative
+
+  # Generate OpenAPI docs through go run instead of a remote BSR plugin.
+  - local: ["go", "run", "github.com/google/gnostic/cmd/protoc-gen-openapi@v0.7.1"]
+    out: docs
+    opt:
+      - paths=source_relative
+      - naming=proto
+    strategy: all
+
+  # gen swagger format api docs
+  # - remote: buf.build/grpc-ecosystem/openapiv2
+  #   out: docs
+
+  # Generate HTML proto docs through go run instead of a remote BSR plugin.
+  - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
+    out: docs
+    opt:
+      - html,docs.html
+      # - markdown,docs.md
+    strategy: all
+
+  # Generate Kratos HTTP transport bindings through go run.
+  - local: ["go", "run", "github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@v2.0.0-20260310032732-f85662384a8c"]
+    out: api
+    opt:
+      - paths=source_relative
+      # supported other parameter
+      # omit if google.api is empty, default: true
+      # - omitempty=false
+      # if google.api is empty, use this prefix, default: ""
+      # - omitempty_prefix=/v1
+
+  # Generate Kratos error helpers through go run.
+  - local: ["go", "run", "github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2@v2.0.0-20260310032732-f85662384a8c"]
+    out: api
+    opt:
+      - paths=source_relative
+
+# ====================================================
+#       other purpose plugins. for more plugins, visit
+#       https://buf.build/plugins
+# ====================================================
+# To generate optimized marshalling & unmarshalling code you can use the plugin,
+# but it conflicts with the default protoc-gen-go plugin.
+# - remote: buf.build/community/planetscale-vtprotobuf
+#   out: api
+#   opt:
+#     - paths=source_relative
+
+# gRPC to JSON proxy generator following the gRPC HTTP spec.
+# - remote: buf.build/grpc-ecosystem/gateway
+#   out: gen
+#   opt:
+#     - paths=source_relative
