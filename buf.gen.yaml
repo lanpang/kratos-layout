@@ -12,8 +12,8 @@ plugins:
     out: api
     opt:
       - paths=source_relative
-      - Mhelloworld/v1/greeter.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
-      - Mhelloworld/v1/error_reason.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
+      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
 
   # Generate Go gRPC stubs through go run instead of a remote BSR plugin.
   - local: ["go", "run", "google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1"]
@@ -21,8 +21,8 @@ plugins:
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
-      - Mhelloworld/v1/greeter.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
-      - Mhelloworld/v1/error_reason.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
+      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
 
   # Generate OpenAPI docs through go run instead of a remote BSR plugin.
   - local: ["go", "run", "github.com/google/gnostic/cmd/protoc-gen-openapi@v0.7.1"]
@@ -30,8 +30,8 @@ plugins:
     opt:
       - paths=source_relative
       - naming=proto
-      - Mhelloworld/v1/greeter.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
-      - Mhelloworld/v1/error_reason.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
+      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
     strategy: all
 
   # gen swagger format api docs
@@ -51,8 +51,8 @@ plugins:
     out: api
     opt:
       - paths=source_relative
-      - Mhelloworld/v1/greeter.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
-      - Mhelloworld/v1/error_reason.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
+      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
       # supported other parameter
       # omit if google.api is empty, default: true
       # - omitempty=false
@@ -64,8 +64,8 @@ plugins:
     out: api
     opt:
       - paths=source_relative
-      - Mhelloworld/v1/greeter.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
-      - Mhelloworld/v1/error_reason.proto=github.com/tpl-x/kratos/api/helloworld/v1;v1
+      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
 
 # ====================================================
 #       other purpose plugins. for more plugins, visit

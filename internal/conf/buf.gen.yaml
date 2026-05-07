@@ -12,6 +12,4 @@ plugins:
     out: .
     opt:
       - paths=source_relative
-      - Mconf.proto=github.com/lanpang/kratos-layout/internal/conf;conf
-
-github.com/lanpang/kratos-layout
+      - "Mconf.proto=github.com/lanpang/kratos-layout/internal/conf;conf"
