@@ -25,10 +25,15 @@ init:
 	go install github.com/bufbuild/buf/cmd/buf@latest
 	go get -tool github.com/google/wire/cmd/wire@v0.7.0
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.1
+	go install github.com/google/gnostic/cmd/protoc-gen-openapi@v0.7.1
+	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@v2.0.0-20260310032732-f85662384a8c
+	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2@v2.0.0-20260310032732-f85662384a8c
 
 proto:
 	$(BUF) generate
-	cd internal/conf && $(BUF) generate
+	$(BUF) generate --template internal/conf/buf.gen.yaml
 
 check-cmd:
 	@test -d "$(CMD_DIR)" || { \

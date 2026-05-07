@@ -7,9 +7,12 @@ managed:
       value: buf.build/go/protovalidate
 
 plugins:
-  # Generate Go protobuf types through go run instead of a remote BSR plugin.
-  - local: ["go", "run", "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11"]
-    out: .
-    opt:
-      - paths=source_relative
-      - "Mconf.proto=github.com/lanpang/kratos-layout/internal/conf;conf"
+  # Generate config Go protobuf types from proto/conf into internal/conf.
+  - local: protoc-gen-go
+    out: internal
+    opt: paths=source_relative
+
+inputs:
+  - directory: .
+    paths:
+      - proto/conf

@@ -97,10 +97,17 @@ buf dep update
 buf dep prune
 ```
 
-生成 API 相关代码：
+生成 API 和配置 protobuf 代码（proto 源文件在 `proto/`，Go 生成代码分别输出到 `api/` 和 `internal/conf/`）：
+
+```bash
+make proto
+```
+
+等价的 buf 命令：
 
 ```bash
 buf generate
+buf generate --template internal/conf/buf.gen.yaml
 ```
 
 > 注意：buf BSR 对未认证请求有频率限制。如果频繁使用 remote plugins 生成代码，建议登录 buf 或配置本地插件。

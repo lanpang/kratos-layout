@@ -7,79 +7,37 @@ managed:
       value: buf.build/go/protovalidate
 
 plugins:
-  # Generate Go protobuf types through go run instead of a remote BSR plugin.
-  - local: ["go", "run", "google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11"]
+  # Generate Go protobuf types.
+  - local: protoc-gen-go
     out: api
-    opt:
-      - paths=source_relative
-      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+    opt: paths=source_relative
 
-  # Generate Go gRPC stubs through go run instead of a remote BSR plugin.
-  - local: ["go", "run", "google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1"]
+  # Generate Go gRPC stubs.
+  - local: protoc-gen-go-grpc
     out: api
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
-      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
 
-  # Generate OpenAPI docs through go run instead of a remote BSR plugin.
-  - local: ["go", "run", "github.com/google/gnostic/cmd/protoc-gen-openapi@v0.7.1"]
+  # Generate OpenAPI docs.
+  - local: protoc-gen-openapi
     out: docs
     opt:
       - paths=source_relative
       - naming=proto
-      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
     strategy: all
 
-  # gen swagger format api docs
-  # - remote: buf.build/grpc-ecosystem/openapiv2
-  #   out: docs
-
-  # Generate HTML proto docs through go run instead of a remote BSR plugin.
-  - local: ["go", "run", "github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1"]
-    out: docs
-    opt:
-      - html,docs.html
-      # - markdown,docs.md
-    strategy: all
-
-  # Generate Kratos HTTP transport bindings through go run.
-  - local: ["go", "run", "github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@v2.0.0-20260310032732-f85662384a8c"]
+  # Generate Kratos HTTP transport bindings.
+  - local: protoc-gen-go-http
     out: api
-    opt:
-      - paths=source_relative
-      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      # supported other parameter
-      # omit if google.api is empty, default: true
-      # - omitempty=false
-      # if google.api is empty, use this prefix, default: ""
-      # - omitempty_prefix=/v1
+    opt: paths=source_relative
 
-  # Generate Kratos error helpers through go run.
-  - local: ["go", "run", "github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2@v2.0.0-20260310032732-f85662384a8c"]
+  # Generate Kratos error helpers.
+  - local: protoc-gen-go-errors
     out: api
-    opt:
-      - paths=source_relative
-      - "Mhelloworld/v1/greeter.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
-      - "Mhelloworld/v1/error_reason.proto=github.com/lanpang/kratos-layout/api/helloworld/v1;v1"
+    opt: paths=source_relative
 
-# ====================================================
-#       other purpose plugins. for more plugins, visit
-#       https://buf.build/plugins
-# ====================================================
-# To generate optimized marshalling & unmarshalling code you can use the plugin,
-# but it conflicts with the default protoc-gen-go plugin.
-# - remote: buf.build/community/planetscale-vtprotobuf
-#   out: api
-#   opt:
-#     - paths=source_relative
-
-# gRPC to JSON proxy generator following the gRPC HTTP spec.
-# - remote: buf.build/grpc-ecosystem/gateway
-#   out: gen
-#   opt:
-#     - paths=source_relative
+inputs:
+  - directory: .
+    paths:
+      - proto/helloworld/v1

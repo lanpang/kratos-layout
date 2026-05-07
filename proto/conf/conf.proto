@@ -4,6 +4,8 @@ package conf;
 import "buf/validate/validate.proto";
 import "google/protobuf/duration.proto";
 
+option go_package = "./internal/conf;conf";
+
 
 message Bootstrap {
   Server server = 1;

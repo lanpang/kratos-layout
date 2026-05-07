@@ -231,13 +231,13 @@ const file_helloworld_v1_greeter_proto_rawDesc = "" +
 	"statusCode2\xa2\x03\n" +
 	"\x0eGreeterService\x12\xc0\x01\n" +
 	"\bSayHello\x12\x1e.helloworld.v1.SayHelloRequest\x1a\x1f.helloworld.v1.SayHelloResponse\"s\xbaGV\x12\x16say hello api function\x1a1demo interface to say hello to the requested user*\tsay hello\x82\xd3\xe4\x93\x02\x14\x12\x12/helloworld/{name}\x12\xcc\x01\n" +
-	"\vLuckySearch\x12!.helloworld.v1.LuckySearchRequest\x1a\".helloworld.v1.LuckySearchResponse\"v\xbaGZ\x12\x19lucky search api function\x1a/demo interface to search  keyword with redirect*\flucky search\x82\xd3\xe4\x93\x02\x13\x12\x11/search/{keyword}B\xe6\x02\xbaG\xec\x01\x12^\n" +
+	"\vLuckySearch\x12!.helloworld.v1.LuckySearchRequest\x1a\".helloworld.v1.LuckySearchResponse\"v\xbaGZ\x12\x19lucky search api function\x1a/demo interface to search  keyword with redirect*\flucky search\x82\xd3\xe4\x93\x02\x13\x12\x11/search/{keyword}B\xfe\x02\xbaG\xec\x01\x12^\n" +
 	"\x14Kratos Demo document\x12\x14Kratos Demo document\")\n" +
 	"\x04czyt\x12\x11https://czyt.tech\x1a\x0eroot@czyt.tech2\x051.0.0\x1a)\n" +
 	"\x15http://localhost:8000\x12\x10Local dev server\x1a,\n" +
 	"\x17https://api.example.com\x12\x11Production server\x1a1\n" +
 	"\x1fhttps://staging-api.example.com\x12\x0eStaging server\n" +
-	"\x11com.helloworld.v1B\fGreeterProtoP\x01\xa2\x02\x03HXX\xaa\x02\rHelloworld.V1\xca\x02\rHelloworld\\V1\xe2\x02\x19Helloworld\\V1\\GPBMetadata\xea\x02\x0eHelloworld::V1b\x06proto3"
+	"\x11com.helloworld.v1B\fGreeterProtoP\x01Z\x16./api/helloworld/v1;v1\xa2\x02\x03HXX\xaa\x02\rHelloworld.V1\xca\x02\rHelloworld\\V1\xe2\x02\x19Helloworld\\V1\\GPBMetadata\xea\x02\x0eHelloworld::V1b\x06proto3"
 
 var (
 	file_helloworld_v1_greeter_proto_rawDescOnce sync.Once

@@ -8,4 +8,4 @@ tasks:
   proto:
     cmds:
       - buf generate
-      - cd internal/conf && buf generate
+      - buf generate --template internal/conf/buf.gen.yaml
