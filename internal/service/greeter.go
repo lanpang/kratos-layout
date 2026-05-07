@@ -1,12 +1,13 @@
 package service
 
 import (
-	"buf.build/go/protovalidate"
 	"context"
 	"fmt"
+
+	"buf.build/go/protovalidate"
 	"github.com/go-kratos/kratos/v2/log"
-	v1 "github.com/tpl-x/kratos/api/helloworld/v1"
-	"github.com/tpl-x/kratos/internal/biz"
+	v1 "github.com/lanpang/kratos-layout/api/helloworld/v1"
+	"github.com/lanpang/kratos-layout/internal/biz"
 )
 
 var _ v1.GreeterServiceServer = (*GreeterService)(nil)

@@ -10,7 +10,7 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	"github.com/tpl-x/kratos/internal/conf"
+	"github.com/lanpang/kratos-layout/internal/conf"
 )
 
 func loadConfig() (*conf.Bootstrap, protovalidate.Validator, error) {

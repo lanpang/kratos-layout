@@ -3,7 +3,7 @@ package data
 import (
 	"context"
 
-	"github.com/tpl-x/kratos/internal/biz"
+	"github.com/lanpang/kratos-layout/internal/biz"
 
 	"github.com/go-kratos/kratos/v2/log"
 )

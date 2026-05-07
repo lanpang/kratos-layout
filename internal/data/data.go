@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
-	"github.com/tpl-x/kratos/internal/conf"
+	"github.com/lanpang/kratos-layout/internal/conf"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

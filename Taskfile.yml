@@ -8,3 +8,4 @@ tasks:
   proto:
     cmds:
       - buf generate
+      - cd internal/conf && buf generate

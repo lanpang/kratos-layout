@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/tpl-x/kratos/internal/pkg/zap"
+	"github.com/lanpang/kratos-layout/internal/pkg/zap"
 
 	_ "go.uber.org/automaxprocs"
 )

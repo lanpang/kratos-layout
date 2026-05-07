@@ -1,12 +1,13 @@
 package zap
 
 import (
+	"os"
+
 	zapv2 "github.com/go-kratos/kratos/contrib/log/zap/v2"
-	"github.com/tpl-x/kratos/internal/conf"
+	"github.com/lanpang/kratos-layout/internal/conf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"os"
 )
 
 // NewLoggerWithLumberjack returns a HandlerFunc that adds a zap logger to the context.

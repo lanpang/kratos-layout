@@ -8,11 +8,11 @@ import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
-	"github.com/tpl-x/kratos/internal/biz"
-	"github.com/tpl-x/kratos/internal/conf"
-	"github.com/tpl-x/kratos/internal/data"
-	"github.com/tpl-x/kratos/internal/server"
-	"github.com/tpl-x/kratos/internal/service"
+	"github.com/lanpang/kratos-layout/internal/biz"
+	"github.com/lanpang/kratos-layout/internal/conf"
+	"github.com/lanpang/kratos-layout/internal/data"
+	"github.com/lanpang/kratos-layout/internal/server"
+	"github.com/lanpang/kratos-layout/internal/service"
 )
 
 func wireApp(*conf.Server, *conf.Data, log.Logger, protovalidate.Validator) (*kratos.App, func(), error) {

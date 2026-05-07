@@ -1,4 +1,4 @@
-module github.com/tpl-x/kratos
+module github.com/lanpang/kratos-layout
 
 go 1.25.7
 

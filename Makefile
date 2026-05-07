@@ -28,6 +28,7 @@ init:
 
 proto:
 	$(BUF) generate
+	cd internal/conf && $(BUF) generate
 
 check-cmd:
 	@test -d "$(CMD_DIR)" || { \
