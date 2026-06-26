@@ -122,6 +122,12 @@ configs/config.yaml
 
 其中包含 HTTP、gRPC、数据库和日志配置示例。运行前请根据本地环境调整数据库连接信息。
 
+## 文档工作流
+
+`docs/README.md` 是工程记忆入口。新需求先写入 `docs/feature-requests.md`，决定要做后进入 `docs/roadmap.md`；长期架构取舍写 `docs/adr/`，API 契约索引写 `docs/api/README.md`，关键端到端验证写 `docs/smoke.md`。
+
+`make proto` 可能在 `docs/` 下生成 OpenAPI 产物。生成产物不要手改，协议源头始终是 `proto/**/*.proto`。
+
 ## 目录结构
 
 ```text
@@ -130,5 +136,5 @@ cmd/        服务启动入口
 configs/    配置文件
 internal/   业务实现代码
 proto/      protobuf 源文件
-docs/       OpenAPI 等文档产物
+docs/       工程记忆文档与 OpenAPI 生成产物
 ```

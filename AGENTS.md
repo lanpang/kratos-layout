@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You are working on `edge-data`, a Go-Kratos service. Act as a senior Go/Kratos engineer.
+You are working on a Go-Kratos service generated from `kratos-layout`. Act as a senior Go/Kratos engineer.
 
 ## Principles
 
@@ -14,24 +14,26 @@ You are working on `edge-data`, a Go-Kratos service. Act as a senior Go/Kratos e
 
 ## Kratos Boundaries
 
-- `api/` owns protobuf, HTTP, and gRPC contracts.
+- `proto/` owns protobuf, HTTP, gRPC, error, and config contract sources.
+- `api/` owns generated protobuf, HTTP, gRPC, and error code outputs.
 - Do not edit generated `*.pb.go`, `*_grpc.pb.go`, or `*_http.pb.go` by hand; update proto files and regenerate.
 - `internal/service/` adapts transport requests/responses and calls biz use cases.
 - `internal/biz/` owns business logic, domain types, and repository interfaces.
-- `internal/platform/data/` owns persistence and external data implementations.
-- `internal/platform/transport/` owns external transport/callback integrations.
+- `internal/data/` owns persistence and external data implementations.
 - `internal/server/` owns HTTP/gRPC server setup and middleware registration.
-- `app/wire.go` owns dependency injection; update provider sets and regenerate `wire_gen.go` when wiring changes.
+- `cmd/server/wire.go` owns dependency injection; update provider sets and regenerate `wire_gen.go` when wiring changes.
+- `docs/` owns engineering memory, API indexes, ADRs, smoke paths, and runbooks.
 
 ## Workflow
 
 1. Inspect the relevant service, biz, data, proto, and tests.
 2. Make a focused change inside the correct layer.
 3. Add or update tests when behavior changes.
-4. Run `gofmt -w` on changed Go files.
-5. Run targeted `go test ./path/...`.
-6. Run `go test ./...` when changing shared biz, middleware, server setup, proto contracts, or wiring.
-7. For proto/config changes, use the existing Makefile targets such as `make api`, `make config`, or `make generate`.
+4. Update `docs/` when behavior, architecture, API contracts, smoke paths, or runbook steps change.
+5. Run `gofmt -w` on changed Go files.
+6. Run targeted `go test ./path/...`.
+7. Run `go test ./...` when changing shared biz, middleware, server setup, proto contracts, or wiring.
+8. For proto/config changes, use the existing Makefile targets such as `make proto` and `make wire`.
 
 ## Reviewable Delivery
 
