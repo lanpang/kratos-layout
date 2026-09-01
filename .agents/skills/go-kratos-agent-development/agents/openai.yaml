@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go Kratos Agent Development"
+  short_description: "Controlled agent development for Go Kratos services"
+  default_prompt: "Use $go-kratos-agent-development to implement this change within the repository’s ADRs and contracts."
