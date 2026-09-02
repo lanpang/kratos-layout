@@ -33,6 +33,8 @@ Do not silently treat a request as overriding a conflicting ADR. Surface the con
 - Read [workspace-and-kratos.md](references/workspace-and-kratos.md) when selecting a module, changing dependencies, or placing code in Kratos layers.
 - Read [contract-seams.md](references/contract-seams.md) when protobuf, public interfaces, generated code, or key tests are involved.
 - Read [persistence-gorm.md](references/persistence-gorm.md) when changing schemas, GORM models, repositories, query options, or transactions.
+- Read [error-handling.md](references/error-handling.md) when adding or changing returned errors, sentinel errors, layer mappings, logging, cleanup, or asynchronous failure propagation.
+- Read [trust-boundaries-and-zero-values.md](references/trust-boundaries-and-zero-values.md) when adding nil checks, validation, defaulting, constructors, pointer fields, optional values, or external adapters.
 - Read [stateful-changes.md](references/stateful-changes.md) when behavior involves states, transitions, retries, idempotency, recovery, concurrency, or consistency.
 - Read [wire-and-lifecycle.md](references/wire-and-lifecycle.md) when changing providers, dependency assembly, goroutines, servers, consumers, schedulers, or cleanup.
 
@@ -44,6 +46,8 @@ Do not load every reference by default. Ordinary Go style, naming, and testing k
 - Let human-authored contracts constrain the implementation; infer routine names and local details from package, receiver, method, module, and nearby code.
 - Preserve user changes and avoid unrelated cleanup.
 - Edit source files rather than generated outputs, then use repository-provided generation commands.
+- Preserve error identity and the repository's established error contract across layers.
+- Treat documented internal invariants as facts; validate at trust boundaries instead of adding defensive checks throughout internal code.
 - Reuse established abstractions before adding packages, interfaces, configuration, schema fields, or infrastructure.
 - Treat comments and shorthand as local vocabulary only when their meaning is established by project context.
 
